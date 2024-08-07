@@ -51,7 +51,7 @@ const ChartSection = ({ data }) => {
   return (
     <>
       <div className="py-4 container-fluid">
-        <h3>Finance - 2024</h3>
+        <h3>Finance - {new Date().getFullYear()}</h3>
         <div className="row gap-0">
           <div className="col-12 col-md-8 rounded px-3 mb-3">
             <SplineChart incomeDataPoints={incomeDataPoints}></SplineChart>
