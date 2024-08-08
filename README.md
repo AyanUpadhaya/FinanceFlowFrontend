@@ -12,6 +12,15 @@ A single page MERN stack application for personal finance tracking. Built with R
 - react-router-dom
 - react-toastify
 
+### Features
+- User Registration and Login
+- CRUD operations (GET, ADD, UPDATE, DELETE Tasks) using RTK Query
+- Filter transactions(EXPENSE, INCOME)
+- Search transactions based on name
+- Frontend pagination
+- Bulk upload transactions
+- Forgot password and reset password
+
 ### Backend Repository
 Link: https://github.com/AyanUpadhaya/FinanceFlowBackend
 #### Frontend live
