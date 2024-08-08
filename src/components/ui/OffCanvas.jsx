@@ -1,4 +1,5 @@
 import React from "react";
+import { githublogo } from "../../assets/getAssets";
 
 const OffCanvas = () => {
   return (
@@ -22,8 +23,16 @@ const OffCanvas = () => {
         </div>
         <div className="offcanvas-body">
           <div>
-            Some text as placeholder. In real life you can have the elements you
-            have chosen. Like, text, images, lists, etc.
+            <a
+              href="https://github.com/AyanUpadhaya/FinanceFlowFrontend"
+              target="_blank"
+              className="text-white text-decoration-none "
+            >
+              <button className="d-flex gap-2 align-items-center btn btn-light w-full rounded">
+                <img src={githublogo} alt="" />
+                <h3 className="text-dark">Github</h3>
+              </button>
+            </a>
           </div>
         </div>
       </div>
