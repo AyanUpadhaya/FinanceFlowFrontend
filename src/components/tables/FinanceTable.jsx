@@ -59,7 +59,9 @@ const FinanceTable = ({
                         ? "0" + (rowsPerPage * (currentPage - 1) + index + 1)
                         : rowsPerPage * (currentPage - 1) + index + 1}
                     </td>
-                    <td>{item?.trxName}</td>
+                    <td>
+                      {item?.trxName?.length > 30? item?.trxName.slice(0, 31) + "...": item?.trxName}
+                    </td>
                     <td>{item?.trxType}</td>
                     <td>{item?.trxAmount + "$"}</td>
                     <td>{item?.trxTag}</td>
