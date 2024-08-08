@@ -4,8 +4,6 @@ import DataSection from "../components/pages/Home/DataSection";
 import ChartSection from "../components/pages/Home/ChartSection";
 import TableSection from "../components/pages/Home/TableSection";
 import { useGetTransactionsQuery } from "../features/transaction/transactionApi";
-import RequestLoader from "../components/modals/RequestLoader";
-import ErrorPage from "../components/ui/ErrorPage";
 import CardsSkeletons from "../components/skeleton/CardsSkeletons";
 import HeaderSkeleton from "../components/skeleton/HeaderSkeleton";
 import ChartsSkeleton from "../components/skeleton/ChartsSkeleton";
