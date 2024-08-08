@@ -238,7 +238,9 @@ const TableSection = ({ data }) => {
             isUpdating={isUpdating}
           ></FinanceTable>
         </div>
-        <div className="py-2 d-flex justify-content-center align-items-center gap-1">
+        <div
+          className={` ${filteredData < 1 && 'd-none'} py-2 d-flex justify-content-center align-items-center gap-1`}
+        >
           <ResponsivePagination
             current={currentPage}
             total={totalPages}
