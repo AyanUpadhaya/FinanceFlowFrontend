@@ -16,6 +16,15 @@ const AddIncomeModal = ({ createTransaction, user, isLoading }) => {
     const trxName = form.trxName.value;
     const trxTag = form.trxTag.value;
     const trxAmount = form.trxAmount.value;
+    if (!trxName || !trxTag || !trxAmount) {
+      ErrorNotify("Required missing field");
+      return;
+    }
+
+    if (parseInt(trxAmount) <= 0) {
+      ErrorNotify("Amount can not be negative or zero");
+      return;
+    }
 
     const data = {
       trxName,

@@ -53,7 +53,7 @@ const FinanceTable = ({
             <>
               {currentRows?.map((item, index) => {
                 return (
-                  <tr key={index}>
+                  <tr key={item?._id}>
                     <td>
                       {currentPage === 1 && index + 1 < 10
                         ? "0" + (rowsPerPage * (currentPage - 1) + index + 1)

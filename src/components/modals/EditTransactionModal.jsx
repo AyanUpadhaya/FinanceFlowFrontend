@@ -27,6 +27,16 @@ const EditTransactionModal = ({
     const trxTag = form.trxTag.value;
     const trxAmount = form.trxAmount.value;
 
+    if (!trxName || !trxTag || !trxAmount) {
+      ErrorNotify("Required missing field");
+      return;
+    }
+
+    if (parseInt(trxAmount) <= 0) {
+      ErrorNotify("Amount can not be negative or zero");
+      return;
+    }
+
     if (
       trxName == selectedItem?.trxName &&
       trxTag == selectedItem?.trxTag &&
@@ -44,7 +54,6 @@ const EditTransactionModal = ({
       trxTag,
       user: selectedItem?.user,
     };
-
 
     try {
       await updateTransaction({ data, id }).unwrap();

@@ -13,7 +13,7 @@ const DataSection = ({ extractedInfo }) => {
 
   return (
     <>
-      <div className="px-2 py-2 d-flex justify-content-between flex-wrap">
+      <div className="px-2 py-2 d-flex justify-content-between align-items-center flex-wrap">
         <div>
           <h3 className="font-monts text-bold">Dashboard</h3>
         </div>

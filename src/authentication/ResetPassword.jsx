@@ -45,7 +45,7 @@ const ResetPassword = () => {
     const data = { password };
     try {
       await resetPassword({ data, tokenId }).unwrap();
-        InfoNotify("Your password change successfully");
+        InfoNotify("Password changed successfully");
         navigate(from, { replace: true });
     } catch (error) {
       ErrorNotify(error?.data?.message);

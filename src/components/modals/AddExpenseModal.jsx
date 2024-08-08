@@ -16,6 +16,16 @@ const AddExpenseModal = ({ createTransaction, user, isLoading }) => {
     const trxTag = form.trxTag.value;
     const trxAmount = form.trxAmount.value;
 
+    if (!trxName || !trxTag || !trxAmount) {
+      ErrorNotify("Required missing field");
+      return;
+    }
+
+    if (parseInt(trxAmount) <= 0) {
+      ErrorNotify("Amount can not be negative or zero");
+      return;
+    }
+
     const data = {
       trxName,
       trxType: "EXPENSE",
@@ -23,7 +33,6 @@ const AddExpenseModal = ({ createTransaction, user, isLoading }) => {
       trxTag,
       user: user?._id,
     };
-
 
     try {
       await createTransaction(data).unwrap();
