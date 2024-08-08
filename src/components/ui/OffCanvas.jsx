@@ -30,7 +30,7 @@ const OffCanvas = () => {
             >
               <button className="d-flex gap-2 align-items-center btn btn-light w-full rounded">
                 <img src={githublogo} alt="" />
-                <h3 className="text-dark">Github</h3>
+                <h3 className="text-dark pt-1">Github</h3>
               </button>
             </a>
           </div>

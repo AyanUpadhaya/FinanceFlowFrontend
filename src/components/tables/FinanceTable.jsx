@@ -31,13 +31,13 @@ const FinanceTable = ({
       <table className="table table-striped">
         <thead>
           <tr>
-            <th className="col head-cell">#</th>
-            <th scope="col head-cell">Trx Name</th>
-            <th scope="col head-cell">Trx Type</th>
-            <th scope="col head-cell">Trx Amount</th>
-            <th scope="col head-cell">Trx Tag</th>
-            <th scope="col head-cell">Created</th>
-            <th scope="col head-cell" className="text-center">
+            <th scope="col">#</th>
+            <th scope="col">Trx Name</th>
+            <th scope="col">Trx Type</th>
+            <th scope="col">Trx Amount</th>
+            <th scope="col">Trx Tag</th>
+            <th scope="col">Created</th>
+            <th scope="col" className="text-center">
               Actions
             </th>
           </tr>
@@ -60,7 +60,9 @@ const FinanceTable = ({
                         : rowsPerPage * (currentPage - 1) + index + 1}
                     </td>
                     <td>
-                      {item?.trxName?.length > 30? item?.trxName.slice(0, 31) + "...": item?.trxName}
+                      {item?.trxName?.length > 30
+                        ? item?.trxName.slice(0, 31) + "..."
+                        : item?.trxName}
                     </td>
                     <td>{item?.trxType}</td>
                     <td>{item?.trxAmount + "$"}</td>

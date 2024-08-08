@@ -1,6 +1,7 @@
+import { ErrorNotify } from "../../utils/getNotify";
 import { saveAuthData } from "../auth/authSlice";
 import { apiSlice } from "./apiSlice";
-
+import moment from "moment";
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
@@ -21,10 +22,17 @@ const authApi = apiSlice.injectEndpoints({
           const result = await queryFulfilled;
           const responseData = result?.data;
           if (responseData) {
-            dispatch(saveAuthData(responseData));
+            const currentDate = moment();
+            const futureDate = currentDate.add(20, "days");
+            const expireAt = futureDate.unix();
+            const data = {
+              ...responseData,
+              expireAt,
+            };
+            dispatch(saveAuthData(data));
           }
         } catch (error) {
-          console.log(error.message);
+          console.log(error);
         }
       },
     }),

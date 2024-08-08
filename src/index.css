@@ -92,12 +92,6 @@ body {
 .dropdown-menu[data-bs-popper] {
   left: -130px !important;
 }
-/* .dropdown-toggle.user-dropdown.show::before{
-  display: none !important;
-}
-.dropdown-toggle.user-dropdown.show::after{
-  display: none !important;
-} */
 
 .cal-card {
   min-height: 150px;
@@ -144,6 +138,7 @@ th:last-of-type{
 }
 .page-link{
   color: #32373a;
+  border: 0 !important;
 }
 .page-item.active > .page-link {
   background-color: #32373a;

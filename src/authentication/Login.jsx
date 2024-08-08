@@ -6,13 +6,15 @@ import { useLoginMutation } from "../features/api/authApi";
 import { ErrorNotify, InfoNotify } from "../utils/getNotify";
 import { useSelector } from "react-redux";
 import RequestLoader from "../components/modals/RequestLoader";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [login, { isLoading, isError, error }] = useLoginMutation();
   const navigate = useNavigate();
   const { auth } = useSelector((state) => state.auth);
+
   useEffect(() => {
-    if (auth?.email) {
+    if (auth?.token) {
       navigate("/");
     }
   }, [auth]);

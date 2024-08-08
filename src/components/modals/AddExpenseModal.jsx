@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InfoNotify } from "../../utils/getNotify";
+import { ErrorNotify, InfoNotify } from "../../utils/getNotify";
 
 const AddExpenseModal = ({ createTransaction, user, isLoading }) => {
   const [amount, setAmount] = useState(0);
@@ -23,7 +23,7 @@ const AddExpenseModal = ({ createTransaction, user, isLoading }) => {
       trxTag,
       user: user?._id,
     };
-    console.log(data);
+
 
     try {
       await createTransaction(data).unwrap();
@@ -31,7 +31,7 @@ const AddExpenseModal = ({ createTransaction, user, isLoading }) => {
       setAmount(0);
       InfoNotify("Transactiion record created");
     } catch (error) {
-      console.log(error.message);
+      ErrorNotify(error.data?.message || "Something went wrong");
     }
   };
   return (
