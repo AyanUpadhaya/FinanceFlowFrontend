@@ -5,7 +5,6 @@ const transactionApi = apiSlice.injectEndpoints({
     getTransactions: builder.query({
       query: (userId) => `/transactions/${userId}`,
       transformResponse: (transactions) => transactions.reverse(),
-      providesTags: ["Transactions"],
     }),
     postTransaction: builder.mutation({
       query: (data) => ({
@@ -13,8 +12,8 @@ const transactionApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Transactions"],
       async onQueryStarted(transaction, { dispatch, queryFulfilled }) {
+        // Optimistically update the cache
         const patchResult = dispatch(
           transactionApi.util.updateQueryData(
             "getTransactions",
@@ -40,9 +39,13 @@ const transactionApi = apiSlice.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         // Optimistically update the cache
         const patchResult = dispatch(
-          api.util.updateQueryData("getTransactions", undefined, (draft) => {
-            return draft.filter((transaction) => transaction._id !== id);
-          })
+          transactionApi.util.updateQueryData(
+            "getTransactions",
+            undefined,
+            (draft) => {
+              return draft.filter((transaction) => transaction._id !== id);
+            }
+          )
         );
 
         try {
@@ -51,7 +54,6 @@ const transactionApi = apiSlice.injectEndpoints({
           patchResult.undo();
         }
       },
-      invalidatesTags: ["Transactions"],
     }),
     updateTransaction: builder.mutation({
       query: ({ data, id }) => ({
@@ -59,7 +61,29 @@ const transactionApi = apiSlice.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Transactions"],
+      async onQueryStarted({ data, id }, { dispatch, queryFulfilled }) {
+        // Optimistically update the cache
+        const patchResult = dispatch(
+          transactionApi.util.updateQueryData(
+            "getTransactions",
+            undefined,
+            (draft) => {
+              const index = draft.findIndex(
+                (transaction) => transaction._id === id
+              );
+              if (index !== -1) {
+                draft[index] = { ...draft[index], ...data };
+              }
+            }
+          )
+        );
+
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          patchResult.undo();
+        }
+      },
     }),
     bulkUploadTransactions: builder.mutation({
       query: ({ formData }) => ({
@@ -67,7 +91,26 @@ const transactionApi = apiSlice.injectEndpoints({
         method: "POST",
         body: formData,
       }),
-      invalidatesTags: ["Transactions"],
+      async onQueryStarted(formData, { dispatch, queryFulfilled }) {
+        try {
+          const { data: newTransactions } = await queryFulfilled;
+
+          // Manually update the cache with the new transactions
+          dispatch(
+            transactionApi.util.updateQueryData(
+              "getTransactions",
+              undefined,
+              (draft) => {
+                newTransactions.forEach((transaction) => {
+                  draft.unshift(transaction);
+                });
+              }
+            )
+          );
+        } catch (error) {
+          console.error("Bulk upload failed:", error);
+        }
+      },
     }),
   }),
 });
