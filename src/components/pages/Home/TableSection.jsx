@@ -66,12 +66,12 @@ const TableSection = ({ data, user }) => {
     }
   };
 
-  const filteredData = data
-    ? [...data]
-        ?.sort(sortByTime)
-        ?.filter((item) => filterBySearch(item, searchValue))
-        ?.filter((item) => filterByOptions(item, searchTerm))
-    : [];
+  const filteredData = [...data]
+    ?.sort(sortByTime)
+    ?.filter((item) => filterBySearch(item, searchValue))
+    ?.filter((item) => filterByOptions(item, searchTerm));
+
+
 
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
 
@@ -237,6 +237,7 @@ const TableSection = ({ data, user }) => {
             updateTransaction={updateTransaction}
             isUpdating={isUpdating}
             user={user}
+            onPageChange={setCurrentPage}
           ></FinanceTable>
         </div>
         <div

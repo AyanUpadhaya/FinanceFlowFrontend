@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatTimestamp } from "../../utils/formatTimeStamp";
 import { InfoNotify, ErrorNotify } from "../../utils/getNotify";
 import EditTransactionModal from "../modals/EditTransactionModal";
@@ -11,17 +11,25 @@ const FinanceTable = ({
   deleteTransaction,
   updateTransaction,
   isUpdating,
-  user
+  user,
+  onPageChange,
 }) => {
   const currentRows = data
     ? [...data].slice(indexOfFirstRow, indexOfLastRow)
     : [];
 
+ //only solution to prevent - currentRows if 0
+  useEffect(()=>{
+    if(currentRows.length < 1){
+      onPageChange(1);
+    }
+  },[currentRows])
+
   const [selectedItem, setSelectedItem] = useState({});
 
   const handleDeleteTransaction = async (id) => {
     try {
-      await deleteTransaction({id,userId:user._id}).unwrap();
+      await deleteTransaction({ id, userId: user._id }).unwrap();
       InfoNotify("Transaction deleted");
     } catch (error) {
       ErrorNotify(error.message);

@@ -169,6 +169,10 @@ th:last-of-type{
   opacity: 0;
 }
 
+.page-item.disabled {
+    border:1px solid #32373a64 !important
+}
+
 @media screen and (max-width: 640px) {
   .login-form {
     width: 100%;
