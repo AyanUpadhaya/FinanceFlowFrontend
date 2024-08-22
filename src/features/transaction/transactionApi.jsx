@@ -33,14 +33,14 @@ const transactionApi = apiSlice.injectEndpoints({
       },
     }),
     deleteTransaction: builder.mutation({
-      query: (id) => ({
+      query: ({ id, userId }) => ({
         url: `/transaction/${id}`,
         method: "DELETE",
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         // Optimistically update the cache
         const patchResult = dispatch(
-          api.util.updateQueryData("getTransactions", undefined, (draft) => {
+          api.util.updateQueryData("getTransactions", userId, (draft) => {
             return draft.filter((transaction) => transaction._id !== id);
           })
         );
@@ -54,7 +54,7 @@ const transactionApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Transactions"],
     }),
     updateTransaction: builder.mutation({
-      query: ({ data, id,userId }) => ({
+      query: ({ data, id, userId }) => ({
         url: `/transaction/${id}`,
         method: "PUT",
         body: data,

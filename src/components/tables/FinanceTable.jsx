@@ -21,7 +21,7 @@ const FinanceTable = ({
 
   const handleDeleteTransaction = async (id) => {
     try {
-      await deleteTransaction(id).unwrap();
+      await deleteTransaction({id,userId:user._id}).unwrap();
       InfoNotify("Transaction deleted");
     } catch (error) {
       ErrorNotify(error.message);
