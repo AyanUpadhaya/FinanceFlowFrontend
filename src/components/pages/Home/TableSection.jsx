@@ -13,7 +13,7 @@ import RequestLoader from "../../modals/RequestLoader";
 
 import { ErrorNotify, InfoNotify } from "../../../utils/getNotify";
 
-const TableSection = ({ data }) => {
+const TableSection = ({ data, user }) => {
   const [deleteTransaction, { isLoading: isDeleteRequesting }] =
     useDeleteTransactionMutation();
 
@@ -123,7 +123,7 @@ const TableSection = ({ data }) => {
           InfoNotify(res?.message || infoMessage);
         })
         .catch((error) => {
-          ErrorNotify( errorMessage || error?.data?.error?.message);
+          ErrorNotify(errorMessage || error?.data?.error?.message);
         });
       ref.current.value = "";
     } else {
@@ -236,10 +236,13 @@ const TableSection = ({ data }) => {
             deleteTransaction={deleteTransaction}
             updateTransaction={updateTransaction}
             isUpdating={isUpdating}
+            user={user}
           ></FinanceTable>
         </div>
         <div
-          className={` ${filteredData < 1 && 'd-none'} py-2 d-flex justify-content-center align-items-center gap-1`}
+          className={` ${
+            filteredData < 1 && "d-none"
+          } py-2 d-flex justify-content-center align-items-center gap-1`}
         >
           <ResponsivePagination
             current={currentPage}

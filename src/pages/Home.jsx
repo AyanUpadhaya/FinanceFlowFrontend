@@ -47,7 +47,7 @@ const Home = () => {
       <div className="bg-light pt-15">
         <DataSection extractedInfo={extractedInfo} />
         <ChartSection data={data} />
-        <TableSection data={data} />
+        <TableSection user={auth} data={data} />
       </div>
     </div>
   );

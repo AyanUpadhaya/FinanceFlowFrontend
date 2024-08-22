@@ -4,6 +4,7 @@ const EditTransactionModal = ({
   selectedItem,
   updateTransaction,
   isUpdating,
+  user,
 }) => {
   const [amount, setAmount] = useState(selectedItem?.trxAmount || 0);
 
@@ -56,7 +57,7 @@ const EditTransactionModal = ({
     };
 
     try {
-      await updateTransaction({ data, id }).unwrap();
+      await updateTransaction({ data, id, userId: user._id }).unwrap();
       form.reset();
       setAmount(0);
       InfoNotify("Transaction record updated");

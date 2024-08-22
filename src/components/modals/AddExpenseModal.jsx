@@ -35,7 +35,7 @@ const AddExpenseModal = ({ createTransaction, user, isLoading }) => {
     };
 
     try {
-      await createTransaction(data).unwrap();
+      await createTransaction({ data, userId: user?._id }).unwrap();
       form.reset();
       setAmount(0);
       InfoNotify("Transactiion record created");

@@ -11,6 +11,7 @@ const FinanceTable = ({
   deleteTransaction,
   updateTransaction,
   isUpdating,
+  user
 }) => {
   const currentRows = data
     ? [...data].slice(indexOfFirstRow, indexOfLastRow)
@@ -95,6 +96,7 @@ const FinanceTable = ({
         updateTransaction={updateTransaction}
         selectedItem={selectedItem}
         isUpdating={isUpdating}
+        user={user}
       ></EditTransactionModal>
     </div>
   );
